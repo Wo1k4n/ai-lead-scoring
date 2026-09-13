@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <button onclick="senden()">Test senden</button>
+  <pre id="ergebnis"></pre>
+
+  <script>
+    async function senden() {
+      const res = await fetch("http://localhost:5678/webhook/d50d88d6-95a2-4521-8396-6a5b518507ed", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: "Max Mustermann",
+          firma: "Testfirma GmbH",
+          anfrage: "Wir brauchen 50 Lizenzen fuer unser Team, Budget 10000 Euro, wollen naechste Woche starten"
+        })
+      });
+      const text = await res.text();
+      document.getElementById("ergebnis").innerText = text;
+    }
+  </script>
+</body>
+</html>
